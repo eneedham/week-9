@@ -16,13 +16,14 @@ body {
 
 .map {
   position: absolute;
-  left: 440px;
+  left: 0px;
   right: 0;
   bottom: 0;
   top: 50px;
 }
 
 .sidebar {
+  display: none;
   position: absolute;
   left: 0px;
   width: 440px;
@@ -33,7 +34,8 @@ body {
   overflow-y: auto;
 }
 
-#toggle-sidebar {
+/*#toggle-sidebar {
+  display: none;
   position: absolute;
   right: 10px;
   top: 60px;
@@ -43,12 +45,43 @@ body {
   border: 0;
   color: #fff;
   display: block;
+}*/
+
+.sidebar-open .sidebar{
+  background-color: #057071;
+  color: white;
+  display: inherit;
+  width: 100%;
+}
+
+.sidebar-open .map{
+  display: none;
 }
 
 @media screen and (min-width: 480px) and (max-width: 800px) {
-
+  .sidebar {
+    width: 200px;
+  }
 }
 
 @media screen and (max-width: 479px) {
+  .map {
+    left: 0px;
+    width: 100%;
+  }
+  .sidebar {
+    display: none;
+  }
+  #toggle-sidebar {
+    position: absolute;
+    right: 10px;
+    top: 60px;
+    z-index: 200;
+    padding: 6px 10px;
+    background-color: #057071;
+    border: 0;
+    color: #fff;
+    display: block;
+  }
 
 }

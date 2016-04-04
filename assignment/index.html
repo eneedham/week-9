@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <!-- CSS Imports -->
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/leaflet.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- Top Bar -->
+  <div class="row2">
+    <h2 class="welcome">Philadelphia Refugee Resettlement</h2>
+  </div>
+  <div class="row">
+    <div class="container-fluid">
+      <!-- Sidebar -->
+      <div class="col-md-2">
+        <div class="sidebar">
+          <!-- Trigger the modal with a button -->
+          <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Click for Project Explanation</button>
+
+          <!-- Modal -->
+          <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Preliminary Project Explanation</h4>
+                </div>
+                <div class="modal-body">
+                  <h4>Problem/Question</h4>
+                  <p>Philadelphia accepted 230 refugees between October 2015 and January 2016. This is an 18.6% increase from the same time period of the previous year. If this trend continues, Philadelphia may see a new refugee population of 887 people between October 2015 and September 2016, an increase above 2014-2015’s 748 arriving refugees. There are several organizations within Philadelphia that work with this incoming population, a need which is clearly growing.</p>
+                  <p>The Nationalities Service Center (NSC), a local 501(c)(3), is one of these organizations that works to help integrate refugees entering Philadelphia into the city and local communities. Among many other programs, NSC operates a refugee resettlement program. NSC meets the refugees at the airport, helps them navigate necessary paperwork and apply for benefits, gain access to the education and healthcare systems, and prepare for employment. Part of this work includes finding them new homes within different neighborhoods of Philadelphia. Every neighborhood offers a different range of services, cost of living, opportunities, social networks, and many other factors that are vital to successful resettlement. </p>
+                  <p>The refugees entering Philadelphia from 2014-2015 came from at least 32 different countries, dictating a wide array of needs and desires in the resettlement process. NSC, and other similar organizations, could greatly benefit from a GIS tool that would help to identify different neighborhoods for resettlement based on the virtues of the neighborhoods and the needs of specific types of refugees. Such an analysis could be performed in a desktop GIS such as ESRI ArcMap but would require a license to the software. Several open source GIS softwares are available, however, these still require competency in acquiring data and utilizing the software. Many organizations may not have these technical skills in-house. A webmap with pre-loaded datasets and tools would be ideal in allowing such organizations to conduct GIS analysis, enabling them to more effectively resettle refugees and give them a greater chance at successful integration into their new communities.</p>
+                  <p>The intention for this project is to combine GIS analysis and web-mapping technologies to create an online tool that will help organizations determine neighborhoods which are best fits for resettling different categories of refugees within Philadelphia.</p>
+                  <h4>The Data</h4>
+                  <p>All data will be uploaded on CartoDB </P>
+                  <ul>
+                  <li>Schools Data</li>
+                  <li>Walkable Access to Healthy Food (existing shapefile)</li>
+                  <li>Farmers Markets</li>
+                  <li>Average Rent</li>
+                  <li>Proximity to Public Transit</li>
+                  <li>Community Based Organizations</li>
+                  <li>Proximity to Commercial Corridors</li>
+                  <li>Census Data</li>
+                  <li>Location of other refugees</li>
+                  </ul>
+                  <h4>Technologies Used</h4>
+                  <ul>
+                  <li>Github - to host the application</li>
+                  <li>CartoDB SQL API</li>
+                  <li>Leaflet</li>
+                  <li>Underscore</li>
+                  <li>jQuery</li>
+                  <li>charts.js</li>
+                  <li>Bootstrap</li>
+                  <li>Turf.js</li>
+                  <li>Some tiles - Stamen for now</li>
+                  </ul>
+                  <h4>User Experiences</h4>
+                  <ul>
+                  <li>Users: The Nationalities Services Center, other community organizations(?)</li>
+                  <li>Benefit to Users: Easy to use online spatial analysis for site selection</li>
+                  <li>Example Websites: I would love one!</li>
+                  </ul>
+                  <h4>Layouts and Visual Design</h4>
+                  <p>As of now, I plan on having a design similar to this webpage. There might have to be multiple "pages" on the sidebar to get through all of the options for analysis before the user would click a 'submit' button to perform the analysis</p>
+                  <p>I would also like to show off the characteristics of different neighborhoods with chart.js - potentially through a bar on the bottom that the user can toggle up. Kind of like a dashboard.</p>
+                  <h4>Anticipated Difficulties</h4>
+                  <ul>
+                  <li>Asynchronous behavior - pulling in data from CartoDB</li>
+                  <li>Deciding how to weight variables in analysis</li>
+                  <li>Probably other things I haven't thought of yet</li>
+                  </ul>
+                  <h4>Missing Pieces</h4>
+                  <ul>
+                  <li>Chart.js -- or D3!</li>
+                  <li>Angular.js - not sure if I need it, but I keep hearing about it</li>
+                  <li>CartoDB</li>
+                  <li>Torque</li>
+                  <li>Mapbox</li>
+                  <li>PostGIS</li>
+                  </ul>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <h3 class="parameters">Neighborhood Selection</h3>
+          <div class="btn-group">
+            <button type="button" class="btn btn-sm btn-danger">Refugee Origin</button>
+            <button type="button" class="btn btn-sm btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="caret"></span>
+              <!-- <span class="sr-only">Toggle Dropdown</span> -->
+            </button>
+            <ul class="dropdown-menu">
+              <li><a href="#">Iraq</a></li>
+              <li><a href="#">Bhutan</a></li>
+              <li><a href="#">Syria</a></li>
+              <li><a href="#">Mexico</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#">Southeast Asia</a></li>
+              <li><a href="#">Western Asia</a></li>
+              <li><a href="#">Eastern Europe</a></li>
+              <li><a href="#">Western Europe</a></li>
+              <li><a href="#">North Africa</a></li>
+              <li><a href="#">East Africa</a></li>
+              <li><a href="#">West Africa</a></li>
+              <li><a href="#">South Africa</a></li>
+              <li><a href="#">Central America</a></li>
+              <li><a href="#">South America</a></li>
+              <!-- <li role="separator" class="divider"></li> -->
+              <!-- <li><a href="#">Separated link</a></li> -->
+            </ul>
+          </div>
+          <div class="factors">
+            <h5 class="factors-title">Factors to Include</h5>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" value="">
+                Schools
+              </label>
+              <label>
+                <input type="checkbox" value="">
+                Walkable Access to Food
+              </label>
+              <label>
+                <input type="checkbox" value="">
+                Average Rent
+              </label>
+              <label>
+                <input type="checkbox" value="">
+                Proximity to Public Transit
+              </label>
+              <label>
+                <input type="checkbox" value="">
+                Community Based Organizations
+              </label>
+              <label>
+                <input type="checkbox" value="">
+                Proximity to Commercial Corridors
+              </label>
+              <label>
+                <input type="checkbox" value="">
+                Another Thing
+              </label>
+              <label>
+                <input type="checkbox" value="">
+                Another Thing
+              </label>
+              <label>
+                <input type="checkbox" value="">
+                Another Thing
+              </label>
+            </div>
+          </div>
+          <div class="rank">
+            <h5 class="rank-title">Rank the Top 3 Most Important Factors</h5>
+            <select class="form-control">
+              <option>options from checkboxes</option>
+              <option>options from checkboxes</option>
+              <option>options from checkboxes</option>
+              <option>options from checkboxes</option>
+              <option>options from checkboxes</option>
+            </select>
+            <select class="form-control">
+              <option>options from checkboxes</option>
+              <option>options from checkboxes</option>
+              <option>options from checkboxes</option>
+              <option>options from checkboxes</option>
+              <option>options from checkboxes</option>
+            </select>
+            <select class="form-control">
+              <option>options from checkboxes</option>
+              <option>options from checkboxes</option>
+              <option>options from checkboxes</option>
+              <option>options from checkboxes</option>
+              <option>options from checkboxes</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <!-- Map -->
+      <div class="col-md-10">
+        <div id="map" class="map"></div>
+      </div>
+    </div>
+  </div>
+  <!-- Javascript Imports -->
+  <script src="js/jquery-2.2.0.js"></script>
+  <script src="js/leaflet.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="js/setup.js"></script>
+</body>
+</html>
+
+<!--
+<div class="row">
+<div class="col-md-4">.col-md-4</div>
+<div class="col-md-8">
+<div class="sidebar">
+<nav class="navbar navbar-default">
+<div class="navbar-header">
+<a class="navbar-brand" href="#">Manufacturers</a>
+</div>
+<ul class="nav navbar-nav navbar-right"> --> -->
+<!-- Split button -->
+<!-- <div class="btn-group">
+<button type="button" class="btn btn-danger">Add New</button>
+<button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<span class="caret"></span>
+<span class="sr-only">Toggle Dropdown</span>
+</button>
+<ul class="dropdown-menu">
+<li><a href="#">View History</a></li>
+<li><a href="#">Email All Manufacturers</a></li> --> -->
+<!-- <li role="separator" class="divider"></li> -->
+<!-- <li><a href="#">Separated link</a></li> -->
+<!-- </ul>
+</div> -->
+<!-- ... -->
+<!-- </ul>
+</nav>
+<div class="item">
+<h2 class="item-heading">Tandy’s Basketweavers</h2>
+<div>490 Freedom Drive<br>
+Philadelphia, PA 19425</div>
+<button type="button" class="btn btn-default btn-sm">
+Low Inventory
+</button>
+</div>
+<div class="sort">
+Sort by <span class="sort-option selected">A–Z</span> <span class="sort-option">Inventory</span>
+</div>
+</div>
+</div>
+</div>
